@@ -13,10 +13,13 @@ app.use("/public", express.static("/tmp"))
 
 app.get("/", (_req, res) => res.status(200).json({message: "Hello from root!"}))
 
-app.use(route)
-
 app.set("port", port)
 
-app.listen(port)
-  .then(() => console.log("server abierto en puerto", port))
-  .catch(error => console.error(error))
+try {
+  app.listen(port, (req, res) => {
+    console.log("server abierto en puerto", port)
+  })
+} catch (error) {
+  console.log(error)
+}
+
